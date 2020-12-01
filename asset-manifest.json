@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/cgungaloo/simple-to-do-app/static/css/main.c2b58da0.chunk.css",
+    "main.js": "/cgungaloo/simple-to-do-app/static/js/main.386efc54.chunk.js",
+    "main.js.map": "/cgungaloo/simple-to-do-app/static/js/main.386efc54.chunk.js.map",
+    "runtime-main.js": "/cgungaloo/simple-to-do-app/static/js/runtime-main.505d1106.js",
+    "runtime-main.js.map": "/cgungaloo/simple-to-do-app/static/js/runtime-main.505d1106.js.map",
+    "static/js/2.55eb2eb7.chunk.js": "/cgungaloo/simple-to-do-app/static/js/2.55eb2eb7.chunk.js",
+    "static/js/2.55eb2eb7.chunk.js.map": "/cgungaloo/simple-to-do-app/static/js/2.55eb2eb7.chunk.js.map",
+    "index.html": "/cgungaloo/simple-to-do-app/index.html",
+    "static/css/main.c2b58da0.chunk.css.map": "/cgungaloo/simple-to-do-app/static/css/main.c2b58da0.chunk.css.map",
+    "static/js/2.55eb2eb7.chunk.js.LICENSE.txt": "/cgungaloo/simple-to-do-app/static/js/2.55eb2eb7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.505d1106.js",
+    "static/js/2.55eb2eb7.chunk.js",
+    "static/css/main.c2b58da0.chunk.css",
+    "static/js/main.386efc54.chunk.js"
+  ]
+}
