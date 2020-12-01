@@ -1,37 +1,35 @@
-import React, { Component } from "react"
+import React, { useState } from "react"
 
-// Getting input from user interaction therefore component will be class
-class InputToDo extends Component {
+const InputTodo = props => {
+    const [inputText, setInputText] = useState({
+        title:"",
+    })
 
-    state = {
-        title: ""
-    }
-
-    onChange = e => {
-        this.setState({
+    const onChange = e => {
+        setInputText({
+            ...inputText,
             [e.target.name]: e.target.value,
         })
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        this.props.addToDoProps(this.state.title);
-        this.setState({
-            title: ""
-        });
+    const handleSubmit = e => {
+        e.preventDefault()
+        props.addToDoProps(inputText.title)
+        setInputText({
+          title: "",
+        })
     }
 
-    render() {
-        return (
-            <form onSubmit={this.handleSubmit} className="form-container">
-                <input type="text"
-                    placeholder="Add Todo..."
-                    value={this.state.title}
-                    onChange={this.onChange}
-                    name="title"></input>
-                <input type="submit" value="Submit" className="input-submit"></input>
-            </form>
-        )
-    }
+    return (
+        <form onSubmit={handleSubmit} className="form-container">
+            <input type="text"
+                placeholder="Add Todo..."
+                value={inputText.title}
+                onChange={onChange}
+                name="title"></input>
+            <input type="submit" value="Submit" className="input-submit"></input>
+        </form>
+    )
 }
-export default InputToDo
+
+export default InputTodo

@@ -1,69 +1,61 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import ToDoList from "./ToDoList"
 import Header from "./Header"
-import InputToDo from "./InputToDo"
-import axios from 'axios';
+import InputTodo from "./InputToDo"
+import axios from "axios"
+import { v4 as uuidv4 } from "uuid";
 
-class TodoContainer extends React.Component {
+const TodoContainer = props => {
+    const [todos, setToDos] = useState([])
+    const [show, setShow] = useState(false)
 
-    state = {
-        todos: [],
-        show: false
-    };
-
-    handleChange = (id) => {
-        this.setState(prevState => ({
-            todos: prevState.todos.map((todo) => {
+    const handleChange = id => {
+        setToDos(
+            todos.map(todo => {
                 if (todo.id === id) {
-                    todo.completed = !todo.completed;
+                    todo.completed = !todo.completed
                 }
-                return todo;
-            }),
-            show: !this.state.show
-        }));
-    };
-
-    deleteToDo = id => {
-        axios
-            .delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(response => 
-                this.setState({
-                    todos: [
-                        ...this.state.todos.filter(todo =>{
-                            return todo.id !== id
-                        }),
-                    ],
-                }))
+                return todo
+            })
+        )
+        setShow(!show)
     }
 
-    addTodoItem = title => {
-        axios
-            .post("https://jsonplaceholder.typicode.com/todos", {
+    const deleteToDo = id => {
+        setToDos([
+            ...todos.filter(todo => {
+                return todo.id !== id
+            }),
+        ])
+    }
+
+    const addToDoItem = title => {
+        const newTodo = {
+            id: uuidv4,
             title: title,
             completed: false,
-        })
-        .then(response => 
-            this.setState({
-                todos: [...this.state.todos, response.data],
-            }))
+        }
+        setToDos([...todos, newTodo])
     }
 
-    componentDidMount(){
-        axios.get("https://jsonplaceholder.typicode.com/todos?_limit=10")
-        .then(response => this.setState({ todos: response.data}))
-    }
+    useEffect(() => {
+        console.log("test run")
+        axios
+            .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
+            .then(response => setToDos(response.data))
+    }, [])
 
-    render() {
-        return (
-            <div className="container">
-                <Header headerSpan={this.state.show}/>
-                <InputToDo addToDoProps={this.addTodoItem} />
-                <ToDoList todos={this.state.todos}
-                    handleChangeProps={this.handleChange}
-                    deleteToDo={this.deleteToDo}
-                />
-            </div>
-        );
-    }
+    return (
+        <div className="container">
+            <Header headerSpan={show} />
+            <InputTodo addToDoProps={addToDoItem} />
+            <ToDoList
+                todos={todos}
+                handleChangeProps={handleChange}
+                deleteToDoProps={deleteToDo}
+            />
+        </div>
+    )
 }
+
 export default TodoContainer
